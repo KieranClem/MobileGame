@@ -8,4 +8,5 @@ public class Item : MonoBehaviour
     public bool CanAccess;
     public int NumOfUse;
     public bool collected;
+    public StoreItem holder;
 }

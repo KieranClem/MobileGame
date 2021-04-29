@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class PlayerMovement : MonoBehaviour
 {
-    NavMeshAgent Nav;
+    public NavMeshAgent Nav;
     public Inventory items;
     
     // Start is called before the first frame update
@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
             RaycastHit hit;
            if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
            {
-                if(hit.collider.gameObject.tag == "Floor")
+                if(hit.collider.gameObject.tag == "Floor" || hit.collider.gameObject.tag == "Door")
                 {
                     Nav.destination = hit.point;
                 }

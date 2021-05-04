@@ -57,10 +57,12 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\StoreItem.cs" />
     <Compile Include="Assets\Scripts\EnemyMovement.cs" />
+    <Compile Include="Assets\Scripts\Door.cs" />
     <Compile Include="Assets\Scripts\Inventory.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Item.cs" />
-    <Compile Include="Assets\Scripts\Door.cs" />
+    <Compile Include="Assets\Scripts\PuzzleHandler.cs" />
+    <Compile Include="Assets\Scripts\ButtonID.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

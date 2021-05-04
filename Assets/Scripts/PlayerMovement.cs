@@ -2,16 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
     public NavMeshAgent Nav;
     public Inventory items;
+    public PuzzleHandler puzzleHandler;
+    public Button UseButton;
+    private Text UseButtonText;
     
     // Start is called before the first frame update
     void Start()
     {
         Nav = this.GetComponent<NavMeshAgent>();
+        UseButtonText = UseButton.GetComponentInChildren<Text>();
     }
 
     // Update is called once per frame
@@ -39,6 +44,23 @@ public class PlayerMovement : MonoBehaviour
         if(other.tag == "Item")
         {
             items.CollectItem(other.GetComponent<Item>());
+        }
+        else if(other.tag == "KeyPanel" && !puzzleHandler.KeyPanelSolved)
+        {
+            UseButton.onClick.RemoveAllListeners();
+            UseButton.onClick.AddListener(delegate { puzzleHandler.OpenKeyPanel(); });
+            UseButton.interactable = true;
+            UseButtonText.text = "Open Key \n Panel";
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "KeyPanel")
+        {
+            UseButton.onClick.RemoveAllListeners();
+            UseButton.interactable = false;
+            UseButtonText.text = "";
         }
     }
 }

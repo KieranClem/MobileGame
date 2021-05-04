@@ -7,6 +7,7 @@ TagManager:
   - Floor
   - Item
   - Door
+  - KeyPanel
   layers:
   - Default
   - TransparentFX

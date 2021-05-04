@@ -1,12 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class Door : MonoBehaviour
 {
     private Quaternion MoveAngle;
-    private bool Unlocked;
+    public bool Unlocked;
     
     // Start is called before the first frame update
     void Start()
@@ -25,19 +24,17 @@ public class Door : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" && !Unlocked)
         {
-            Inventory PlayerInven = other.GetComponent<Inventory>();
-            foreach(Item item in PlayerInven.Collected)
-            {
-                if(item.ItemName == "Key")
-                {
-                    Unlocked = true;
-                    PlayerInven.RemoveFromList(item.holder, item, true);
-                    this.GetComponent<NavMeshObstacle>().enabled = false;
-                    return;
-                }
-            }
+            other.GetComponent<Inventory>().KeyUsable(this);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.tag == "Player")
+        {
+            other.GetComponent<Inventory>().KeyUnusable();
         }
     }
 }
